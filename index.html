@@ -68,14 +68,11 @@
   <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Header(){
-      return (
-        <div class="header">Calculadora</div>
-      )
+    const Header = () => {
+      <div class="header">Calculadora</div>
     }
 
-    function Calculator(){
-      return(
+    const Calculator = () => {
         <div class="calculator">
           <div class="display"></div>
           <div class="keyboard">
@@ -91,10 +88,9 @@
             <button>0</button>
           </div>
         </div>
-      )
     }
 
-    function App(){
+    const App = () => {
       return (
         <div>
           <Header />
