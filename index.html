@@ -74,7 +74,7 @@
       return (
         <button 
           onClick={() => {
-            props.onNumberClick(props.value)
+            props.onClick(props.value)
           }}
         >
           {props.value}
@@ -100,8 +100,8 @@
             {keyboard.map(value => (
               <Button
                 key={value} 
-                value={key}
-                onNumberClick={handleNumberClick}
+                value={value}
+                onClick={handleNumberClick}
               />
             ))}
           </div>
