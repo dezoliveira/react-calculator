@@ -101,7 +101,7 @@
     ]
 
     const adavancedKeys = [
-      "(",")","Hist"
+      "(",")","Hist","Up","AC"
     ]
 
     const Header = () => <div className="header">Calculadora</div>
@@ -123,12 +123,20 @@
       const [showAd, toggleAd] = React.useState(true)
       const [history, setHistory] = React.useState([])
       const [showHist, toggleHist] = React.useState(true)
+      const histRef = React.useRef()
 
       React.useEffect(() => {
         if(error){
           setError()
         }
       }, [display])
+
+      React.useEffect(() => {
+        if(history.length > 2 && showHist){
+          histRef.current.scrollTop =
+            histRef.current.scrollHeight
+        }
+      }, [history.length, showHist])
 
       const doTheMath = () => {
         try { 
@@ -169,6 +177,21 @@
             toggleHist(!showHist)
             break
 
+          case "AC":
+            setDisplay("")
+            setHistory([])
+            break
+
+          case "Up":
+            const lastIndex = history.length -1
+            if (lastIndex > -1){
+              const newDisplay = history[lastIndex].calculation
+              const newHistory = history.slice(0, lastIndex)
+              setDisplay(newDisplay)
+              setHistory(newHistory)
+            }
+            break
+
           default: 
             setDisplay(`${display}${value}`)
         }
@@ -190,9 +213,11 @@
       return (
         <div className="calculator">
           {showHist && (
-            <div className="history">
-              {history.map(({ calculation, result }) => (
-                <p>{`${calculation} = ${result}`}</p>
+            <div  ref={histRef} className="history">
+              {history.map(({ calculation, result }, index) => (
+                <p key={index}>
+                  {`${calculation} = ${result}`}
+                </p>
               ))}
             </div>
           )}
