@@ -5,15 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
     * {
       box-sizing: border-box;
+      font-family: 'Roboto', 'sans-serif';
     }
 
     body{
       margin: 0;
       padding: 0;
-      background-color: #121212;
-      font-family: sans-serif;
     }
 
     .header {
@@ -25,7 +25,13 @@
     }
 
     .calculator {
-      background-color: #fff;
+      background-color: #4e4f50;
+      box-shadow:
+        rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+        rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+        rgba(0, 0, 0, 0.09) 0px -3px 5px;
       margin: 40px auto;
       max-width: 400px;
       padding: 16px;
@@ -33,11 +39,15 @@
     }
 
     .display {
+      background-color: #7E8C74;
       width: 100%;
       padding: 8px;
-      border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1.2em;
+    }
+
+    input:focus{
+      outline: none;
     }
 
     .keyboard {
@@ -52,9 +62,11 @@
     button {
       border: 0;
       border-radius: 4px;
-      background-color: #efefef;
+      background-color: #e2ded0;
       padding: 8px;
       cursor: pointer;
+      font-size: 15px;
+      font-weight: 700;
     }
 
     button.span2 {
@@ -62,8 +74,8 @@
     }
 
     button.primary {
-      background-color: #ffeec2;
-      color: #c49023;
+      background-color: #647c90;
+      color: #ffffff;
     }
 
     .error {
@@ -104,7 +116,7 @@
       "(",")","Hist","Up","AC"
     ]
 
-    const Header = () => <div className="header">Calculadora</div>
+    const Header = () => <div className="header">React Calculator</div>
 
     const Button = ({ value, onClick, className}) => (
         <button 
@@ -120,9 +132,9 @@
     const Calculator = () => {
       const [display, setDisplay] = React.useState("")
       const [error, setError] = React.useState()
-      const [showAd, toggleAd] = React.useState(true)
+      const [showAd, toggleAd] = React.useState(false)
       const [history, setHistory] = React.useState([])
-      const [showHist, toggleHist] = React.useState(true)
+      const [showHist, toggleHist] = React.useState(false)
       const histRef = React.useRef()
 
       React.useEffect(() => {
